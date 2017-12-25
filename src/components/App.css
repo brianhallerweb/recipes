@@ -1,0 +1,433 @@
+* {
+  padding: 0;
+  margin: 0;
+}
+
+body {
+  padding-top: 40px;
+  font-family: "Lato", sans-serif;
+  font-size: 15px;
+}
+
+/*Navigation Bar*/
+.brand h4 {
+  text-decoration: none;
+  color: #404d43;
+  font-weight: bolder;
+}
+
+.brand h4:hover {
+  text-decoration: none;
+}
+
+.navbtn {
+  color: #7c1b51;
+  line-height: 1.5em;
+}
+
+.navbtn:hover {
+  font-weight: bold;
+}
+
+.navbtnActive {
+  font-weight: bold;
+}
+
+.newrecipebtn {
+  text-decoration: none;
+  color: #404d43;
+  font-size: 15px;
+  cursor: pointer;
+}
+
+.newrecipebtn:hover {
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.newrecipebtnActive {
+  font-weight: bold;
+}
+
+/*Intro Message*/
+.intro h4 {
+  margin-top: 30px;
+  margin-bottom: 25px;
+  letter-spacing: 0.5px;
+}
+
+.intro p {
+  line-height: 1.5em;
+}
+
+/*Search*/
+.backArrow {
+  font-size: 12px;
+}
+
+.arrowWords {
+  margin-left: 5px;
+}
+
+/*display recipe titles*/
+.titles {
+  margin-bottom: 3px;
+}
+
+.categoryLabel {
+  padding-bottom: 3px;
+}
+
+.titleLabel {
+  padding-bottom: 3px;
+}
+
+/*large screens*/
+@media only screen and (min-width: 701px) {
+  /*big initial grid*/
+  .container {
+    display: grid;
+    grid-template-columns: 1fr 4fr;
+    grid-template-rows: auto;
+    grid-template-areas: "nav main";
+    max-width: 1000px;
+    grid-column-gap: 100px;
+    justify-items: center;
+    align-items: center;
+  }
+
+  /*grid inside nav bar*/
+  nav {
+    grid-area: nav;
+    background-color: #c8d8c8;
+    border-radius: 8px;
+    color: white;
+    padding: 30px 40px 40px 40px;
+    display: grid;
+    grid-template-columns: 150px;
+    grid-template-rows: 40px 170px auto auto;
+    grid-template-areas:
+      "brand"
+      "categories"
+      "new"
+      "extraBackground";
+    grid-gap: 50px;
+    align-self: stretch;
+  }
+
+  /*elements inside nav bar*/
+  .brand {
+    font-family: "Bad Script";
+    grid-area: brand;
+    align-self: start;
+  }
+
+  .categories {
+    grid-area: categories;
+    display: grid;
+    grid-template-columns: 1fr;
+    align-self: start;
+  }
+
+  .new {
+    grid-area: new;
+    align-self: start;
+  }
+
+  .extraBackground {
+    grid-area: extraBackground;
+  }
+
+  /*elements that display only on mobile*/
+  .dropdown {
+    display: none;
+  }
+
+  .nav {
+    display: none;
+  }
+
+  .newMobile {
+    display: none;
+  }
+
+  /*main area grid*/
+  main {
+    grid-area: main;
+    display: grid;
+    grid-template-rows: auto auto;
+    grid-template-areas:
+      "topAside"
+      "section";
+    align-self: start;
+    justify-self: start;
+    margin-top: 10px;
+    margin-right: 30px;
+  }
+
+  /*search bar*/
+  aside {
+    grid-area: "topAside";
+  }
+
+  .search {
+    max-width: 400px;
+  }
+
+  /*search results*/
+  .searchList {
+    margin-top: 25px;
+  }
+
+  .searchList li {
+    text-decoration: none;
+    list-style: none;
+    color: #7c1b51;
+  }
+
+  /*recipe list when navigating with categories*/
+  .recipeList li {
+    text-decoration: none;
+    list-style: none;
+    color: #7c1b51;
+  }
+
+  .displayTitles h4 {
+    margin-top: 20px;
+    margin-bottom: 20px;
+  }
+
+  /*individual recipies*/
+  .displayRecipe h4 {
+    margin-top: 20px;
+    margin-bottom: 20px;
+  }
+
+  .instructions {
+    margin-bottom: 20px;
+  }
+
+  /*create new new recipe modal*/
+  .instructionsLabel {
+    margin-bottom: 0px;
+    padding-bottom: 0px;
+  }
+
+  .targetEditor {
+    border: 1px solid #bdbdbd;
+    border-radius: 5px;
+    background-color: #fff;
+    min-height: 250px;
+    padding-left: 10px;
+    padding-right: 5px;
+  }
+
+  .targetEditorFocus {
+    border: 1px solid rgba(84, 150, 207, 0.8);
+    border-radius: 5px;
+    background-color: #fff;
+    min-height: 250px;
+    padding-left: 10px;
+    padding-right: 5px;
+    box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075),
+      0 0 8px rgba(66, 139, 202, 0.7);
+  }
+
+  .targetEditor:active {
+    border: 1px solid rgba(84, 150, 207, 0.8);
+    border-radius: 5px;
+    background-color: #fff;
+    min-height: 250px;
+    padding-left: 10px;
+    padding-right: 5px;
+    box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075),
+      0 0 8px rgba(66, 139, 202, 0.7);
+  }
+}
+
+@media only screen and (max-width: 700px) {
+  /*big initial grid*/
+  .container {
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: auto auto auto;
+    grid-template-areas:
+      "nav"
+      "search"
+      "main";
+    grid-row-gap: 10px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  /*grid inside nav bar*/
+  nav {
+    grid-area: nav;
+    background-color: #c8d8c8;
+    border-radius: 8px;
+    padding: 10px 20px 5px 20px;
+    display: grid;
+    grid-template-columns: 1fr 50fr;
+    grid-template-rows: auto;
+    grid-template-areas: "dropdown brand";
+    align-self: start;
+  }
+
+  /*elements inside nav bar*/
+  .brand {
+    font-family: "Bad Script";
+    grid-area: brand;
+    justify-self: center;
+    padding-right: 20px;
+    padding-top: 2px;
+  }
+
+  .hamburger {
+    font-size: 25px;
+    color: #7c1b51;
+  }
+
+  .dropdown {
+    align-self: center;
+  }
+
+  .dropdownContent {
+    display: none;
+  }
+
+  /*elements that are only in the desktop nav bar*/
+  .new {
+    display: none;
+  }
+
+  .categories {
+    display: none;
+  }
+
+  /*grid inside the dropdown*/
+  .dropdown:hover .dropdownContent {
+    grid-area: categories;
+    display: grid;
+    grid-template-columns: 1fr;
+    position: absolute;
+    background-color: #f5f8f5;
+    border: 1px solid #d3d3d3;
+    border-radius: 8px;
+    min-width: 142px;
+    padding: 10px 10px 10px 10px;
+    z-index: 1000;
+  }
+
+  /*search bar*/
+  .search {
+    grid-area: search;
+    width: 70%;
+    margin: auto;
+  }
+
+  /*main area*/
+  main {
+    grid-area: main;
+    justify-self: center;
+    margin-left: 20px;
+    margin-right: 20px;
+  }
+
+  /*search results*/
+  .searchList {
+    margin-top: 35px;
+  }
+
+  .searchList li {
+    text-decoration: none;
+    list-style: none;
+    color: #7c1b51;
+    grid-area: recipeList;
+  }
+
+  /*recipe list when navigating with categories*/
+  .displayTitles {
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-areas: "recipeList";
+    justify-items: center;
+  }
+
+  .displayTitles h4 {
+    margin-top: 40px;
+    margin-bottom: 20px;
+    text-align: center;
+  }
+
+  .recipeList li {
+    text-decoration: none;
+    list-style: none;
+    color: #7c1b51;
+    grid-area: recipeList;
+  }
+
+  /*welcome intro*/
+  .intro h4 {
+    text-align: center;
+  }
+
+  .intro p {
+    text-align: center;
+    width: 80%;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  /*I don't think this is needed*/
+  /*.searchBox {
+    width: 50%;
+    margin: auto;
+  }*/
+
+  /*individual recipies*/
+  .displayRecipe h4 {
+    margin-top: 30px;
+    margin-bottom: 20px;
+  }
+
+  .instructions {
+    margin-bottom: 20px;
+  }
+
+  /*create new new recipe modal*/
+  .instructionsLabel {
+    margin-bottom: 0px;
+    padding-bottom: 0px;
+  }
+
+  .targetEditor {
+    border: 1px solid #bdbdbd;
+    border-radius: 5px;
+    background-color: #fff;
+    min-height: 250px;
+    padding-left: 10px;
+    padding-right: 5px;
+  }
+
+  .targetEditorFocus {
+    border: 1px solid rgba(84, 150, 207, 0.8);
+    border-radius: 5px;
+    background-color: #fff;
+    min-height: 250px;
+    padding-left: 10px;
+    padding-right: 5px;
+    box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075),
+      0 0 8px rgba(66, 139, 202, 0.7);
+  }
+
+  .targetEditor:active {
+    border: 1px solid rgba(84, 150, 207, 0.8);
+    border-radius: 5px;
+    background-color: #fff;
+    min-height: 250px;
+    padding-left: 10px;
+    padding-right: 5px;
+    box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075),
+      0 0 8px rgba(66, 139, 202, 0.7);
+  }
+}
