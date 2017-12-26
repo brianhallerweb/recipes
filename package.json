@@ -6,6 +6,7 @@
   },
   "private": true,
   "dependencies": {
+    "body-parser": "^1.18.2",
     "draft-js": "^0.10.3",
     "draftjs-to-html": "^0.7.6",
     "html-to-draftjs": "^1.0.1",
