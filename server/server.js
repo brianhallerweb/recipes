@@ -4,6 +4,7 @@ var bodyParser = require("body-parser");
 var mongoose = require("mongoose");
 var Recipes = require("../models/recipes");
 mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/recipes");
+const path = require("path");
 
 app.use(bodyParser.json());
 

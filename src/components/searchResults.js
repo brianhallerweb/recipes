@@ -47,7 +47,7 @@ class SearchResults extends Component {
             <h4>Welcome to the Haller Family Recipes database</h4>
             <p>
               Choose a category from the menu to get started, or use the search
-              box above to find recipes by titles.
+              box above to find recipes by title.
             </p>
             <p>
               Friends and family are welcome to contribute by adding recipes. I
@@ -66,8 +66,8 @@ class SearchResults extends Component {
 }
 
 const mapStateToProps = state => ({
-  search: state.search,
-  searchedRecipes: state.searchedRecipes
+  search: state.reducer.search,
+  searchedRecipes: state.reducer.searchedRecipes
 });
 
 const mapDispatchToProps = dispatch => ({

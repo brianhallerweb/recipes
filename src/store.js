@@ -1,12 +1,14 @@
-import { createStore } from "redux";
+import { createStore, combineReducers, applyMiddleware } from "redux";
 import reducer from "./reducers/reducer";
+import { routerReducer, routerMiddleware } from "react-router-redux";
+import createHistory from "history/createBrowserHistory";
 
-const defaultState = {
-  category: "",
-  search: "",
-  searchedRecipes: [],
-  error: "",
-  success: ""
-};
+export const history = createHistory();
+const middleware = routerMiddleware(history);
 
-export default createStore(reducer, defaultState);
+let rootReducer = combineReducers({
+  reducer,
+  router: routerReducer
+});
+
+export const store = createStore(rootReducer, applyMiddleware(middleware));

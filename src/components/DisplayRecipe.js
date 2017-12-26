@@ -213,7 +213,7 @@ class DisplayRecipe extends Component {
 }
 
 const mapStateToProps = state => ({
-  category: state.category
+  category: state.reducer.category
 });
 
 const mapDispatchToProps = dispatch => ({

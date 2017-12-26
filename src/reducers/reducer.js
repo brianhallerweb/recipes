@@ -1,4 +1,12 @@
-const reducer = (state, action) => {
+const initialState = {
+  category: "",
+  search: "",
+  searchedRecipes: [],
+  error: "",
+  success: ""
+};
+
+const reducer = (state = initialState, action) => {
   switch (action.type) {
     case "Category":
       return {

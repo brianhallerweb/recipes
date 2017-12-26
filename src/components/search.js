@@ -41,8 +41,8 @@ class Search extends Component {
 }
 
 const mapStateToProps = state => ({
-  search: state.search,
-  searchedRecipes: state.searchedRecipes
+  search: state.reducer.search,
+  searchedRecipes: state.reducer.searchedRecipes
 });
 
 const mapDispatchToProps = dispatch => ({

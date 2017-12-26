@@ -6,7 +6,9 @@ import Error from "./errorModal";
 import Success from "./successModal";
 import SearchResults from "./searchResults";
 import Search from "./search";
-import { BrowserRouter as Router, Route, Link } from "react-router-dom";
+import { Route, Link } from "react-router-dom";
+import { ConnectedRouter as Router } from "react-router-redux";
+import { history } from "../store";
 import {
   Button,
   Modal,
@@ -89,7 +91,7 @@ class App extends Component {
 
   render() {
     return (
-      <Router>
+      <Router history={history}>
         <div className="container">
           <nav>
             <div className="brand">
@@ -509,8 +511,8 @@ class App extends Component {
 }
 
 const mapStateToProps = state => ({
-  category: state.category,
-  search: state.search
+  category: state.reducer.category,
+  search: state.reducer.search
 });
 
 const mapDispatchToProps = dispatch => ({

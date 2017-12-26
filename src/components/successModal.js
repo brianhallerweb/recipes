@@ -36,7 +36,7 @@ class Success extends Component {
 }
 
 const mapStateToProps = state => ({
-  success: state.success
+  success: state.reducer.success
 });
 
 const mapDispatchToProps = dispatch => ({

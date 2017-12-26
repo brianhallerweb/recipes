@@ -47,7 +47,7 @@ class DisplayTitles extends Component {
 }
 
 const mapStateToProps = state => ({
-  category: state.category
+  category: state.reducer.category
 });
 
 export default connect(mapStateToProps)(DisplayTitles);
