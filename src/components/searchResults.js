@@ -26,21 +26,24 @@ class SearchResults extends Component {
                 Search results for: {this.props.search}
               </span>
             </div>
-
-            <ul className="searchList">
-              {this.props.searchedRecipes.map(recipe => {
-                return (
-                  <Link to={`/DisplayRecipe/${recipe._id}`}>
-                    <li
-                      className="titles"
-                      onClick={() => this.props.setSearch("")}
-                    >
-                      {recipe.title}
-                    </li>
-                  </Link>
-                );
-              })}
-            </ul>
+            {this.props.searchedRecipes.length !== 0 ? (
+              <ul className="searchList">
+                {this.props.searchedRecipes.map(recipe => {
+                  return (
+                    <Link to={`/DisplayRecipe/${recipe._id}`}>
+                      <li
+                        className="titles"
+                        onClick={() => this.props.setSearch("")}
+                      >
+                        {recipe.title}
+                      </li>
+                    </Link>
+                  );
+                })}
+              </ul>
+            ) : (
+              <p className="searchList">No recipes found</p>
+            )}
           </div>
         ) : (
           <div className="intro">
