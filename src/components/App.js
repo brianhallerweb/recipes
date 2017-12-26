@@ -124,7 +124,7 @@ class App extends Component {
                 }
               >
                 <Link
-                  to="/DisplayTitles"
+                  to="/recipes"
                   className={
                     this.props.category === "salad" ? "navbtnActive" : "navbtn"
                   }
@@ -138,7 +138,7 @@ class App extends Component {
                   Salads
                 </Link>
                 <Link
-                  to="/DisplayTitles"
+                  to="/recipes"
                   className={
                     this.props.category === "soup" ? "navbtnActive" : "navbtn"
                   }
@@ -152,7 +152,7 @@ class App extends Component {
                   Soups
                 </Link>
                 <Link
-                  to="/DisplayTitles"
+                  to="/recipes"
                   className={
                     this.props.category === "main" ? "navbtnActive" : "navbtn"
                   }
@@ -166,7 +166,7 @@ class App extends Component {
                   Main
                 </Link>
                 <Link
-                  to="/DisplayTitles"
+                  to="/recipes"
                   className={
                     this.props.category === "side" ? "navbtnActive" : "navbtn"
                   }
@@ -180,7 +180,7 @@ class App extends Component {
                   Sides
                 </Link>
                 <Link
-                  to="/DisplayTitles"
+                  to="/recipes"
                   className={
                     this.props.category === "drink" ? "navbtnActive" : "navbtn"
                   }
@@ -194,7 +194,7 @@ class App extends Component {
                   Drinks
                 </Link>
                 <Link
-                  to="/DisplayTitles"
+                  to="/recipes"
                   className={
                     this.props.category === "dessert"
                       ? "navbtnActive"
@@ -210,7 +210,7 @@ class App extends Component {
                   Desserts
                 </Link>
                 <Link
-                  to="/DisplayTitles"
+                  to="/recipes"
                   className={
                     this.props.category === "misc" ? "navbtnActive" : "navbtn"
                   }
@@ -224,7 +224,7 @@ class App extends Component {
                   Misc
                 </Link>
                 <Link
-                  to="/DisplayTitles"
+                  to="/recipes"
                   className={
                     this.props.category === "all" ? "navbtnActive" : "navbtn"
                   }
@@ -258,7 +258,7 @@ class App extends Component {
             </div>
             <div className="categories">
               <Link
-                to="/DisplayTitles"
+                to="/recipes"
                 className={
                   this.props.category === "salad" ? "navbtnActive" : "navbtn"
                 }
@@ -271,7 +271,7 @@ class App extends Component {
                 Salads
               </Link>
               <Link
-                to="/DisplayTitles"
+                to="/recipes"
                 className={
                   this.props.category === "soup" ? "navbtnActive" : "navbtn"
                 }
@@ -284,7 +284,7 @@ class App extends Component {
                 Soups
               </Link>
               <Link
-                to="/DisplayTitles"
+                to="/recipes"
                 className={
                   this.props.category === "main" ? "navbtnActive" : "navbtn"
                 }
@@ -297,7 +297,7 @@ class App extends Component {
                 Main
               </Link>
               <Link
-                to="/DisplayTitles"
+                to="/recipes"
                 className={
                   this.props.category === "side" ? "navbtnActive" : "navbtn"
                 }
@@ -310,7 +310,7 @@ class App extends Component {
                 Sides
               </Link>
               <Link
-                to="/DisplayTitles"
+                to="/recipes"
                 className={
                   this.props.category === "drink" ? "navbtnActive" : "navbtn"
                 }
@@ -323,7 +323,7 @@ class App extends Component {
                 Drinks
               </Link>
               <Link
-                to="/DisplayTitles"
+                to="/recipes"
                 className={
                   this.props.category === "dessert" ? "navbtnActive" : "navbtn"
                 }
@@ -336,7 +336,7 @@ class App extends Component {
                 Desserts
               </Link>
               <Link
-                to="/DisplayTitles"
+                to="/recipes"
                 className={
                   this.props.category === "misc" ? "navbtnActive" : "navbtn"
                 }
@@ -349,7 +349,7 @@ class App extends Component {
                 Misc
               </Link>
               <Link
-                to="/DisplayTitles"
+                to="/recipes"
                 className={
                   this.props.category === "all" ? "navbtnActive" : "navbtn"
                 }
@@ -385,7 +385,7 @@ class App extends Component {
             <section>
               <Route exact path="/" component={SearchResults} />
               <Route
-                path="/DisplayTitles"
+                path="/recipes"
                 component={
                   this.props.search === "" ? DisplayTitles : SearchResults
                 }
