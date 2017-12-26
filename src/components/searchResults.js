@@ -56,7 +56,7 @@ class SearchResults extends Component {
             </p>
             <p>
               Created by{" "}
-              <a href="https://www.brianhallerweb.com">Brian Haller</a>
+              <a href="http://www.brianhallerweb.com">Brian Haller</a>
             </p>
           </div>
         )}
