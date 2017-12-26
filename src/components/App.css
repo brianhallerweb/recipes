@@ -291,7 +291,7 @@ body {
     align-self: center;
   }
 
-  .dropdownContent {
+  .dropdownContentHidden {
     display: none;
   }
 
@@ -305,7 +305,7 @@ body {
   }
 
   /*grid inside the dropdown*/
-  .dropdown:hover .dropdownContent {
+  .dropdownContentActive {
     grid-area: categories;
     display: grid;
     grid-template-columns: 1fr;

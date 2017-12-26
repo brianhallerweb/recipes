@@ -50,6 +50,7 @@ class App extends Component {
     this.initialContentState = contentState;
     this.state = {
       showModal: false,
+      showDropdown: false,
       inFocus: false,
       searchTerm: "",
       title: "",
@@ -103,14 +104,25 @@ class App extends Component {
                 <h4>Haller Family Recipes</h4>
               </Link>
             </div>
-            <div className="dropdown">
+            <div
+              className="dropdown"
+              onClick={() =>
+                this.setState({ showDropdown: !this.state.showDropdown })
+              }
+            >
               <span>
                 <Glyphicon
                   className="hamburger"
                   glyph="glyphicon glyphicon-menu-hamburger"
                 />
               </span>
-              <div className="dropdownContent">
+              <div
+                className={
+                  this.state.showDropdown === true
+                    ? "dropdownContentActive"
+                    : "dropdownContentHidden"
+                }
+              >
                 <Link
                   to="/DisplayTitles"
                   className={
@@ -119,6 +131,7 @@ class App extends Component {
                   onClick={() => {
                     this.props.setCategory("salad");
                     this.props.setSearch("");
+                    this.setState({ showDropdown: !this.state.showDropdown });
                   }}
                   style={{ textDecoration: "none", color: "#7c1b51" }}
                 >
@@ -132,6 +145,7 @@ class App extends Component {
                   onClick={() => {
                     this.props.setCategory("soup");
                     this.props.setSearch("");
+                    this.setState({ showDropdown: !this.state.showDropdown });
                   }}
                   style={{ textDecoration: "none", color: "#7c1b51" }}
                 >
@@ -145,6 +159,7 @@ class App extends Component {
                   onClick={() => {
                     this.props.setCategory("main");
                     this.props.setSearch("");
+                    this.setState({ showDropdown: !this.state.showDropdown });
                   }}
                   style={{ textDecoration: "none", color: "#7c1b51" }}
                 >
@@ -158,6 +173,7 @@ class App extends Component {
                   onClick={() => {
                     this.props.setCategory("side");
                     this.props.setSearch("");
+                    this.setState({ showDropdown: !this.state.showDropdown });
                   }}
                   style={{ textDecoration: "none", color: "#7c1b51" }}
                 >
@@ -171,6 +187,7 @@ class App extends Component {
                   onClick={() => {
                     this.props.setCategory("drink");
                     this.props.setSearch("");
+                    this.setState({ showDropdown: !this.state.showDropdown });
                   }}
                   style={{ textDecoration: "none", color: "#7c1b51" }}
                 >
@@ -186,6 +203,7 @@ class App extends Component {
                   onClick={() => {
                     this.props.setCategory("dessert");
                     this.props.setSearch("");
+                    this.setState({ showDropdown: !this.state.showDropdown });
                   }}
                   style={{ textDecoration: "none", color: "#7c1b51" }}
                 >
@@ -199,6 +217,7 @@ class App extends Component {
                   onClick={() => {
                     this.props.setCategory("misc");
                     this.props.setSearch("");
+                    this.setState({ showDropdown: !this.state.showDropdown });
                   }}
                   style={{ textDecoration: "none", color: "#7c1b51" }}
                 >
@@ -212,6 +231,7 @@ class App extends Component {
                   onClick={() => {
                     this.props.setCategory("all");
                     this.props.setSearch("");
+                    this.setState({ showDropdown: !this.state.showDropdown });
                   }}
                   style={{ textDecoration: "none", color: "#7c1b51" }}
                 >
@@ -228,6 +248,7 @@ class App extends Component {
                     onClick={() => {
                       this.setState({ showModal: true });
                       this.props.setSearch("");
+                      this.setState({ showDropdown: !this.state.showDropdown });
                     }}
                   >
                     Create new recipe
