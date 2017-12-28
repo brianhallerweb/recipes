@@ -108,13 +108,7 @@ class DisplayRecipe extends Component {
             <Glyphicon glyph="glyphicon glyphicon-edit" />
           </OverlayTrigger>
         </div>
-        <Modal
-          dialogClassName="adModal"
-          show={this.state.showModal}
-          onHide={() => {
-            this.setState({ showModal: false });
-          }}
-        >
+        <Modal dialogClassName="adModal" show={this.state.showModal}>
           <Modal.Body>
             <div className="modalBody">
               <form>
