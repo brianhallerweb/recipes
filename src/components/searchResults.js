@@ -58,8 +58,7 @@ class SearchResults extends Component {
               favorite recipes.
             </p>
             <p>
-              Created by{" "}
-              <a href="https://www.brianhallerweb.github.io">Brian Haller</a>
+              Created by <a href="//brianhallerweb.github.io">Brian Haller</a>
             </p>
           </div>
         )}
