@@ -92,7 +92,7 @@ class App extends Component {
   render() {
     return (
       <Router history={history}>
-        <div className="container">
+        <div className="mainSec">
           <nav>
             <div className="brand">
               <Link
