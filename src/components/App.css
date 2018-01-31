@@ -373,11 +373,13 @@ body {
     margin-right: auto;
   }
 
-  /*I don't think this is needed*/
-  /*.searchBox {
-    width: 50%;
-    margin: auto;
-  }*/
+  /*img centered on mobile*/
+  .imageHeader img {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 300px;
+  }
 
   /*individual recipies*/
   .displayRecipe h4 {
