@@ -99,7 +99,6 @@ body {
 
   /*grid inside nav bar*/
   nav {
-    grid-area: nav;
     padding: 30px 40px 40px 50px;
     border-right: 1px solid #e0e0e0;
     background-color: #fafafa;
@@ -115,7 +114,6 @@ body {
       "categories"
       "new";
     grid-gap: 50px;
-    align-self: stretch;
   }
 
   /*elements inside nav bar*/
@@ -387,6 +385,7 @@ body {
     margin-bottom: 20px;
     font-weight: 500;
     font-size: 22px;
+    text-align: center;
   }
 
   .instructions {
