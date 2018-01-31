@@ -3,6 +3,13 @@ var app = express();
 var bodyParser = require("body-parser");
 var mongoose = require("mongoose");
 var Recipes = require("../models/recipes");
+const cloudinary = require("cloudinary");
+
+cloudinary.config({
+  cloud_name: "brianhallerweb",
+  api_key: "574846749284825",
+  api_secret: "-G1krosA4aRXET_T28tOoKE6C-Y"
+});
 mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/recipes");
 const path = require("path");
 
@@ -30,6 +37,7 @@ app.get("/search/:searchString", function(req, res) {
 
 app.post("/recipes", function(req, res) {
   var newRecipe = new Recipes({
+    cloudinaryId: req.body.cloudinaryId,
     title: req.body.title,
     category: req.body.category,
     content: req.body.contentState
@@ -44,30 +52,40 @@ app.post("/recipes", function(req, res) {
 });
 
 app.delete("/deleterecipes/:id", function(req, res) {
-  Recipes.remove({ _id: req.params.id }, function(err, result) {
-    if (err) {
-      res.status(500).json(err);
-    } else {
-      res.json(result);
-    }
-  });
-});
-
-app.put("/editrecipes/:id", function(req, res) {
-  Recipes.findByIdAndUpdate(
-    { _id: req.params.id },
-    {
-      $set: req.body
-    },
-    { new: true },
-    function(err, result) {
+  cloudinary.v2.uploader.destroy(req.body.cloudinary_id, function(
+    error,
+    result
+  ) {
+    Recipes.remove({ _id: req.params.id }, function(err, result) {
       if (err) {
         res.status(500).json(err);
       } else {
         res.json(result);
       }
-    }
-  );
+    });
+  });
+});
+
+app.put("/editrecipes/:id", function(req, res) {
+  cloudinary.v2.uploader.destroy(req.body.cloudinaryIdDelete, function(
+    error,
+    result
+  ) {
+    Recipes.findByIdAndUpdate(
+      { _id: req.params.id },
+      {
+        $set: req.body
+      },
+      { new: true },
+      function(err, result) {
+        if (err) {
+          res.status(500).json(err);
+        } else {
+          res.json(result);
+        }
+      }
+    );
+  });
 });
 
 app.use(express.static("build"));

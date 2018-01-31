@@ -13,6 +13,13 @@ import {
   Tooltip
 } from "react-bootstrap";
 import { Editor } from "react-draft-wysiwyg";
+import { Transformation, Image } from "cloudinary-react";
+import Dropzone from "react-dropzone";
+import request from "superagent";
+
+const CLOUDINARY_UPLOAD_PRESET = "exabyfdn";
+const CLOUDINARY_UPLOAD_URL =
+  "https://api.cloudinary.com/v1_1/brianhallerweb/upload";
 
 class DisplayRecipe extends Component {
   constructor(props) {
@@ -20,10 +27,12 @@ class DisplayRecipe extends Component {
     this.state = {
       title: "",
       category: "",
+      cloudinaryId: "",
       contentState: "",
       id: props.match.params.id,
       showModal: false,
-      inFocus: false
+      inFocus: false,
+      myImage: ""
     };
   }
 
@@ -34,6 +43,7 @@ class DisplayRecipe extends Component {
         this.setState({
           title: recipe.title,
           category: recipe.category,
+          cloudinaryId: recipe.cloudinaryId,
           contentState: recipe.content
         })
       );
@@ -46,18 +56,45 @@ class DisplayRecipe extends Component {
   };
 
   editRecipe = () => {
-    fetch("/editrecipes/" + this.state.id, {
-      method: "PUT",
-      headers: {
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify({
-        title: this.state.title,
-        category: this.state.category,
-        content: this.state.contentState
-      })
-    }).then(() => {
-      this.setState({ showModal: false });
+    let upload = request
+      .post(CLOUDINARY_UPLOAD_URL)
+      .field("upload_preset", CLOUDINARY_UPLOAD_PRESET)
+      .field("file", this.state.myImage);
+
+    upload.end((err, response) => {
+      if (err) {
+        this.props.addErrorMessage(
+          "Your picture failed to save. Make sure your picture is a jpg or png."
+        );
+      }
+
+      if (response.body.secure_url !== "") {
+        fetch("/editrecipes/" + this.state.id, {
+          method: "PUT",
+          headers: {
+            "Content-Type": "application/json"
+          },
+          body: JSON.stringify({
+            cloudinaryIdDelete: this.state.cloudinaryId,
+            cloudinaryId: response.body.public_id,
+            title: this.state.title,
+            category: this.state.category,
+            content: this.state.contentState
+          })
+        }).then(() => {
+          this.setState({ showModal: false });
+          fetch("/recipes/" + this.state.id)
+            .then(response => response.json())
+            .then(recipe =>
+              this.setState({
+                title: recipe.title,
+                category: recipe.category,
+                cloudinaryId: recipe.cloudinaryId,
+                contentState: recipe.content
+              })
+            );
+        });
+      }
     });
   };
 
@@ -68,7 +105,8 @@ class DisplayRecipe extends Component {
         "Content-Type": "application/json"
       },
       body: JSON.stringify({
-        _id: this.state.id
+        _id: this.state.id,
+        cloudinary_id: this.state.cloudinaryId
       })
     })
       .then(response => {
@@ -85,6 +123,16 @@ class DisplayRecipe extends Component {
       });
   };
 
+  onDrop(accepted, rejected) {
+    if (rejected.length !== 0) {
+      this.props.addErrorMessage("Your picture must be a jpg or png");
+    }
+
+    this.setState({
+      myImage: accepted[0]
+    });
+  }
+
   render() {
     const tooltip = (
       <Tooltip placement="bottom" className="in" id="tooltip-bottom">
@@ -93,6 +141,11 @@ class DisplayRecipe extends Component {
     );
     return (
       <div className="displayRecipe">
+        <div className="imageHeader">
+          <Image cloudName="brianhallerweb" publicId={this.state.cloudinaryId}>
+            <Transformation height="200" width="300" crop="fill" />
+          </Image>
+        </div>
         <h4>{this.state.title}</h4>
         <div
           className="instructions"
@@ -164,6 +217,53 @@ class DisplayRecipe extends Component {
                       options: []
                     }}
                   />
+                </FormGroup>
+
+                <FormGroup>
+                  <ControlLabel>Picture</ControlLabel>
+                  <Dropzone
+                    onDrop={this.onDrop.bind(this)}
+                    accept="image/jpeg, image/png"
+                    style={{
+                      borderStyle: "dashed",
+                      borderWidth: 1,
+                      borderRadius: 2,
+                      borderColor: "#bdbdbd",
+                      height: "100px"
+                    }}
+                    activeStyle={{
+                      borderStyle: "solid",
+                      borderColor: "#d9534f"
+                    }}
+                  >
+                    <div
+                      style={{
+                        marginTop: 10,
+                        marginLeft: 12
+                      }}
+                    >
+                      <p
+                        style={{
+                          color: "#989898"
+                        }}
+                      >
+                        Drag & drop or click to upload a new picture. Existing
+                        picture will be deleted.
+                      </p>
+                      {this.state.myImage ? (
+                        <p
+                          style={{
+                            color: "#d9534f",
+                            fontWeight: "bold"
+                          }}
+                        >
+                          File selected: {this.state.myImage.name}
+                        </p>
+                      ) : (
+                        ""
+                      )}
+                    </div>
+                  </Dropzone>
                 </FormGroup>
 
                 <Button

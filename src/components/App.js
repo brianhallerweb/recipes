@@ -28,7 +28,8 @@ import "whatwg-fetch";
 import { convertFromRaw } from "draft-js";
 import { Editor } from "react-draft-wysiwyg";
 import "../../node_modules/react-draft-wysiwyg/dist/react-draft-wysiwyg.css";
-require("typeface-bad-script");
+import Dropzone from "react-dropzone";
+import request from "superagent";
 
 const content = {
   entityMap: {},
@@ -45,6 +46,10 @@ const content = {
   ]
 };
 
+const CLOUDINARY_UPLOAD_PRESET = "exabyfdn";
+const CLOUDINARY_UPLOAD_URL =
+  "https://api.cloudinary.com/v1_1/brianhallerweb/upload";
+
 class App extends Component {
   constructor(props) {
     super(props);
@@ -57,6 +62,7 @@ class App extends Component {
       searchTerm: "",
       title: "",
       category: "",
+      myImage: "",
       contentState
     };
   }
@@ -68,26 +74,61 @@ class App extends Component {
   };
 
   postRecipe = () => {
-    fetch("/recipes", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify({
-        title: this.state.title,
-        category: this.state.category,
-        contentState: this.state.contentState
-      })
-    }).then(response => {
-      if (response.status === 500) {
+    let upload = request
+      .post(CLOUDINARY_UPLOAD_URL)
+      .field("upload_preset", CLOUDINARY_UPLOAD_PRESET)
+      .field("file", this.state.myImage);
+
+    upload.end((err, response) => {
+      if (err) {
         this.props.addErrorMessage(
-          "Your recipe failed to save. Make sure you have included a title, category, and instructions."
+          "Your picture failed to save. Make sure your picture is a jpg or png."
         );
-      } else if (response.status === 200) {
-        this.props.addSuccessMessage("Your recipe saved successfully.");
+      }
+
+      if (response.body.secure_url !== "") {
+        fetch("/recipes", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json"
+          },
+          body: JSON.stringify({
+            cloudinaryId: response.body.public_id,
+            title: this.state.title,
+            category: this.state.category,
+            contentState: this.state.contentState
+          })
+        }).then(response => {
+          if (response.status === 500) {
+            this.props.addErrorMessage(
+              "Your recipe failed to save. Make sure you have included a title, category, and instructions (picture is optional)."
+            );
+          } else if (response.status === 200) {
+            this.props.addSuccessMessage("Your recipe saved successfully.");
+          }
+
+          this.setState({
+            showModal: false,
+            title: "",
+            category: "",
+            search: "",
+            myImage: "",
+            contentState: ""
+          });
+        });
       }
     });
   };
+
+  onDrop(accepted, rejected) {
+    if (rejected.length !== 0) {
+      this.props.addErrorMessage("Your picture must be a jpg or png");
+    }
+
+    this.setState({
+      myImage: accepted[0]
+    });
+  }
 
   render() {
     return (
@@ -458,19 +499,58 @@ class App extends Component {
                       }}
                     />
                   </FormGroup>
+                  <FormGroup>
+                    <ControlLabel>Picture</ControlLabel>
+                    <Dropzone
+                      onDrop={this.onDrop.bind(this)}
+                      accept="image/jpeg, image/png"
+                      style={{
+                        borderStyle: "dashed",
+                        borderWidth: 1,
+                        borderRadius: 2,
+                        borderColor: "#bdbdbd",
+                        height: "100px"
+                      }}
+                      activeStyle={{
+                        borderStyle: "solid",
+                        borderColor: "#d9534f"
+                      }}
+                    >
+                      <div
+                        style={{
+                          marginTop: 10,
+                          marginLeft: 12
+                        }}
+                      >
+                        <p
+                          style={{
+                            color: "#989898"
+                          }}
+                        >
+                          Drag & drop or click to upload a picture (single
+                          jpg/png files only)
+                        </p>
+                        {this.state.myImage ? (
+                          <p
+                            style={{
+                              color: "#d9534f",
+                              fontWeight: "bold"
+                            }}
+                          >
+                            File selected: {this.state.myImage.name}
+                          </p>
+                        ) : (
+                          ""
+                        )}
+                      </div>
+                    </Dropzone>
+                  </FormGroup>
 
                   <Button
                     bsStyle="primary"
                     onClick={e => {
                       e.preventDefault();
                       this.postRecipe();
-                      this.setState({
-                        showModal: false,
-                        title: "",
-                        category: "",
-                        search: "",
-                        contentState: ""
-                      });
                     }}
                   >
                     Save
