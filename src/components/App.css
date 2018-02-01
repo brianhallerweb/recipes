@@ -87,6 +87,11 @@ body {
   box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.2), 0 2px 5px 0 rgba(0, 0, 0, 0.19);
 }
 
+.imageModal img {
+  max-height: 100%;
+  max-width: 100%;
+}
+
 /*large screens*/
 @media only screen and (min-width: 851px) {
   /*big initial grid*/

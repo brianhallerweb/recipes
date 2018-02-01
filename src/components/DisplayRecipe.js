@@ -30,6 +30,7 @@ class DisplayRecipe extends Component {
       cloudinaryId: "",
       contentState: "",
       id: props.match.params.id,
+      showPicModal: false,
       showModal: false,
       inFocus: false,
       myImage: ""
@@ -141,11 +142,29 @@ class DisplayRecipe extends Component {
     );
     return (
       <div className="displayRecipe">
-        <div className="imageHeader">
+        <div
+          className="imageHeader"
+          onClick={() => this.setState({ showPicModal: true })}
+        >
           <Image cloudName="brianhallerweb" publicId={this.state.cloudinaryId}>
             <Transformation height="200" width="300" crop="fill" />
           </Image>
         </div>
+        <Modal
+          show={this.state.showPicModal}
+          onHide={() => this.setState({ showPicModal: false })}
+        >
+          <Modal.Body>
+            <div className="imageModal">
+              <Image
+                cloudName="brianhallerweb"
+                publicId={this.state.cloudinaryId}
+              >
+                <Transformation height="400" width="600" crop="fit" />
+              </Image>
+            </div>
+          </Modal.Body>
+        </Modal>
         <h4>{this.state.title}</h4>
         <div
           className="instructions"
