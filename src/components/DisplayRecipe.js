@@ -147,7 +147,7 @@ class DisplayRecipe extends Component {
           onClick={() => this.setState({ showPicModal: true })}
         >
           <Image cloudName="brianhallerweb" publicId={this.state.cloudinaryId}>
-            <Transformation height="160" width="240" crop="fill" />
+            <Transformation height="128" width="192" crop="fill" />
           </Image>
         </div>
         <Modal
