@@ -160,7 +160,7 @@ class DisplayRecipe extends Component {
                 cloudName="brianhallerweb"
                 publicId={this.state.cloudinaryId}
               >
-                <Transformation height="400" width="600" crop="fit" />
+                <Transformation height="400" width="600" crop="fill" />
               </Image>
             </div>
           </Modal.Body>
