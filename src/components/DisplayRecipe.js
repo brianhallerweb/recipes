@@ -292,17 +292,7 @@ class DisplayRecipe extends Component {
                     this.editRecipe();
                   }}
                 >
-                  Update
-                </Button>
-                <Button
-                  style={{ marginLeft: "5px" }}
-                  bsStyle="danger"
-                  onClick={e => {
-                    e.preventDefault();
-                    this.deleteRecipe();
-                  }}
-                >
-                  Delete
+                  <i className="fa fa-refresh" style={{ marginRight: "5px" }} />Update
                 </Button>
                 <Button
                   style={{ marginLeft: "5px" }}
@@ -314,7 +304,17 @@ class DisplayRecipe extends Component {
                     });
                   }}
                 >
-                  Cancel
+                  <i className="fa fa-times" style={{ marginRight: "5px" }} />Cancel
+                </Button>
+                <Button
+                  style={{ position: "fixed", right: 15 }}
+                  bsStyle="danger"
+                  onClick={e => {
+                    e.preventDefault();
+                    this.deleteRecipe();
+                  }}
+                >
+                  <i className="fa fa-trash" style={{ marginRight: "5px" }} />Delete
                 </Button>
               </form>
             </div>
