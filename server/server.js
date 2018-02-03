@@ -88,6 +88,23 @@ app.put("/editrecipes/:id", function(req, res) {
   });
 });
 
+app.put("/star/:id", function(req, res) {
+  Recipes.findByIdAndUpdate(
+    { _id: req.params.id },
+    {
+      $set: req.body
+    },
+    { new: true },
+    function(err, result) {
+      if (err) {
+        res.status(500).json(err);
+      } else {
+        res.json(result);
+      }
+    }
+  );
+});
+
 app.use(express.static("build"));
 app.get("*", (req, res) =>
   res.sendFile(path.join(__dirname, "../build/index.html"))

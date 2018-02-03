@@ -5,6 +5,19 @@ import { setSearch } from "../actions/actions";
 import { Link } from "react-router-dom";
 
 class SearchResults extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      recipes: []
+    };
+  }
+
+  componentDidMount() {
+    fetch("/recipes/")
+      .then(response => response.json())
+      .then(recipes => this.setState({ recipes: recipes }));
+  }
+
   render() {
     const tooltip = (
       <Tooltip placement="bottom" className="in" id="tooltip-bottom">
@@ -47,19 +60,21 @@ class SearchResults extends Component {
           </div>
         ) : (
           <div className="intro">
-            <h4>Welcome to the Haller Family Recipes database</h4>
-            <p>
-              Choose a category from the menu to get started, or use the search
-              box above to find recipes by title.
-            </p>
-            <p>
-              Friends and family are welcome to contribute by adding recipes. I
-              would like for this to be a place where we all keep and share our
-              favorite recipes.
-            </p>
-            <p>
-              Created by <a href="//brianhallerweb.github.io">Brian Haller</a>
-            </p>
+            <h4>Favorites</h4>
+            <ul className="recipeList">
+              {this.state.recipes.map(recipe => {
+                if (recipe.starSelected === true) {
+                  return (
+                    <Link
+                      className="titles"
+                      to={`/DisplayRecipe/${recipe._id}`}
+                    >
+                      <li>{recipe.title}</li>
+                    </Link>
+                  );
+                }
+              })}
+            </ul>
           </div>
         )}
       </div>

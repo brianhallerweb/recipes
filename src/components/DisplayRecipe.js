@@ -33,7 +33,8 @@ class DisplayRecipe extends Component {
       showPicModal: false,
       showModal: false,
       inFocus: false,
-      myImage: ""
+      myImage: "",
+      starSelected: false
     };
   }
 
@@ -45,7 +46,8 @@ class DisplayRecipe extends Component {
           title: recipe.title,
           category: recipe.category,
           cloudinaryId: recipe.cloudinaryId,
-          contentState: recipe.content
+          contentState: recipe.content,
+          starSelected: recipe.starSelected
         })
       );
   }
@@ -132,10 +134,29 @@ class DisplayRecipe extends Component {
     });
   }
 
+  async clickStar() {
+    await this.setState({ starSelected: !this.state.starSelected });
+
+    fetch("/star/" + this.state.id, {
+      method: "Put",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({
+        starSelected: this.state.starSelected
+      })
+    });
+  }
+
   render() {
     const tooltip = (
       <Tooltip placement="bottom" className="in" id="tooltip-bottom">
         edit
+      </Tooltip>
+    );
+    const tooltipStar = (
+      <Tooltip placement="right" className="in" id="tooltip-right">
+        Toggle Favorite
       </Tooltip>
     );
     return (
@@ -166,7 +187,37 @@ class DisplayRecipe extends Component {
             </div>
           </Modal.Body>
         </Modal>
-        <h4>{this.state.title}</h4>
+
+        <h4>
+          {this.state.title}{" "}
+          <div
+            className={this.state.starClass}
+            style={{ display: "inline" }}
+            onClick={this.clickStar.bind(this)}
+          >
+            <OverlayTrigger placement="right" overlay={tooltipStar}>
+              {this.state.starSelected ? (
+                <i
+                  className="fa fa-star"
+                  style={{
+                    marginLeft: "15px",
+                    fontSize: "18px",
+                    color: "gold"
+                  }}
+                />
+              ) : (
+                <i
+                  className="fa fa-star-o"
+                  style={{
+                    marginLeft: "15px",
+                    fontSize: "18px"
+                  }}
+                />
+              )}
+            </OverlayTrigger>
+          </div>
+        </h4>
+
         <div
           className="instructions"
           dangerouslySetInnerHTML={{

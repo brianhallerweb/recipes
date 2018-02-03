@@ -5,7 +5,8 @@ var recipesSchema = Schema(
     cloudinaryId: { type: String, required: false },
     title: { type: String, required: true },
     category: { type: String, required: true },
-    content: { type: Object, required: true }
+    content: { type: Object, required: true },
+    starSelected: { type: Boolean }
   },
   {
     minimize: false
