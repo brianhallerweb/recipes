@@ -64,9 +64,7 @@ class DisplayRecipe extends Component {
 
     upload.end((err, response) => {
       if (err) {
-        this.props.addErrorMessage(
-          "Your picture failed to save. Make sure your picture is a jpg or png."
-        );
+        console.log(err);
       }
 
       if (response.body.secure_url !== "") {
@@ -246,6 +244,7 @@ class DisplayRecipe extends Component {
                   <Dropzone
                     onDrop={this.onDrop.bind(this)}
                     accept="image/jpeg, image/png"
+                    value="test"
                     style={{
                       borderStyle: "dashed",
                       borderWidth: 1,
