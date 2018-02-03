@@ -155,7 +155,10 @@ class DisplayRecipe extends Component {
           onHide={() => this.setState({ showPicModal: false })}
         >
           <Modal.Body>
-            <div className="imageModal">
+            <div
+              className="imageModal"
+              onClick={() => this.setState({ showPicModal: false })}
+            >
               <Image
                 cloudName="brianhallerweb"
                 publicId={this.state.cloudinaryId}
@@ -292,7 +295,7 @@ class DisplayRecipe extends Component {
                     this.editRecipe();
                   }}
                 >
-                  <i className="fa fa-refresh" style={{ marginRight: "5px" }} />Update
+                  Update
                 </Button>
                 <Button
                   style={{ marginLeft: "5px" }}
@@ -304,7 +307,7 @@ class DisplayRecipe extends Component {
                     });
                   }}
                 >
-                  <i className="fa fa-times" style={{ marginRight: "5px" }} />Cancel
+                  Cancel
                 </Button>
                 <Button
                   style={{ position: "fixed", right: 15 }}
@@ -314,7 +317,7 @@ class DisplayRecipe extends Component {
                     this.deleteRecipe();
                   }}
                 >
-                  <i className="fa fa-trash" style={{ marginRight: "5px" }} />Delete
+                  <i className="fa fa-trash" style={{ fontSize: "17px" }} />
                 </Button>
               </form>
             </div>

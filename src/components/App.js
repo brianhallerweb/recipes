@@ -553,7 +553,7 @@ class App extends Component {
                       this.postRecipe();
                     }}
                   >
-                    <i className="fa fa-save" style={{ marginRight: "5px" }} />Save
+                    Save
                   </Button>
                   <Button
                     style={{ marginLeft: "5px" }}
@@ -569,7 +569,7 @@ class App extends Component {
                       });
                     }}
                   >
-                    <i className="fa fa-times" style={{ marginRight: "5px" }} />Cancel
+                    Cancel
                   </Button>
                 </form>
               </div>
